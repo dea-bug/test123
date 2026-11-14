@@ -79,6 +79,10 @@ title: Home
 <body>
     <div class="slider">
         <div class="slide-track">
+            <hr width="100%" size="2">
+            <br />
+            <br />
+            <br />
             <!-- Original 12 slides -->
             <div class="slide">
                 <img src="{{site.baseurl}}/assets/img/marquee/ama-lg-02.svg" alt="">
@@ -159,7 +163,8 @@ title: Home
     </div>
     <div style=" left: 0; width: 100%; font-family:verdana ; color:  lightgrey ; text-align: center; font-size:10px ">Brands and Artists we've collaborated with ⤴</div>
     <br>
-    {% include footer.html %}
+    {% for item in site.data.settings.social %}
+    <a href="{{ item.link }}" class="menu-link" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
 </body>
 </html>
 
