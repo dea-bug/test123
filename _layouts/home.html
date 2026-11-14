@@ -2,6 +2,7 @@
 layout: default
 title: Home
 ---
+
 <html>
 <head>
     <style>
@@ -163,6 +164,10 @@ title: Home
 
 
 
+
+{% for post in paginator.posts %}
+  {% include featured-post.html %}
+{% endfor %}
 
 <!-- Pagination links -->
 <div class="pagination">
