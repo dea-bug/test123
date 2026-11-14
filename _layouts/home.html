@@ -3,28 +3,21 @@ layout: default
 title: Home
 ---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Using @font-face</title>
-    <style>
-        @font-face {
-            font-family: 'R Italic';
-            src: url('https://dea-bug.github.io/test123/assets/fonts/R Italic.ttf') format('ttf'), url('https://dea-bug.github.io/test123/assets/fonts/R Italic.ttf') format('ttf');
-        }
+<style>
+    @font-face {
+        font-family: R Italic;
+        src =url (https://dea-bug.github.io/test123/assets/fonts/R Italic.ttf);
+    }
 
-        body {
-            font-family: 'R Italic';
-        }
-    </style>
-</head>
-
+    h1 {
+        font-family: R Italic;
+        color: pink;
+        font-size: 40px;
+    }
+</style>
+<h1>Title Using my Own Font</h1>
 <body>
-    <h1>Using Custom Font with @font-face</h1>
-    <p>
-        This paragraph uses the 'OpenSans'
-        font loaded using @font-face.
-    </p>
+    I used my own font!
 </body>
 
 {% for post in paginator.posts %}
