@@ -7,96 +7,110 @@ title: Home
 <head>
     <style>
 
-        body {
-            font-size: 16px;
-            line-height: 32px;
-            font-weight: 400;
-            -moz-osx-font-smoothing: grayscale;
-            word-break: break-word;
-            -webkit-font-smoothing: antialiased;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        * {
+        /* ============================================================
+   BASE / RESET
+   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            border: none;
-            outline: none;
+            border: 0;
+            outline: 0;
             font-size: 100%;
         }
 
-        *, :after, :before {
-            box-sizing: border-box;
+        body {
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            word-break: break-word;
+            margin: 0;
+            /* NOTE: removed display:flex / justify-content:center / align-items:center.
+     Those were centering the ENTIRE page and breaking a full-width hero
+     inside an existing Jekyll page. Centering is done per-element below. */
         }
 
-        /* ============ HERO SECTION ============= */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ============================================================
+   HERO SECTION
+   ============================================================ */
         .creative-hero--section {
             position: relative;
             overflow: hidden;
+            padding: 40px 0;
         }
 
-            .creative-hero--section .bg {
+            /* Base styles for the overlay (was missing – only the media query
+   targeted .bg-overlay, so on desktop it did nothing). */
+            .creative-hero--section .bg-overlay {
                 position: absolute;
-                left: 0;
-                top: 0;
-                height: 100%;
-                width: 100%;
-                background-repeat: no-repeat;
-                background-position: 50%;
-                background-size: cover;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
             }
 
         .auto-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
             max-width: 1310px;
-        }
-
-        .auto-container {
-            position: static;
             padding: 0 15px;
             margin: 0 auto;
-            width: 100%;
-            height: 100%;
         }
 
-        .creative-hero--section .content-box {
+        .content-box {
             position: relative;
             max-width: 540px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
-            height: 100%;
-            animation: fadeInUp 1s ease-in-out 0.6s forwards;
+            text-align: center;
         }
 
-            .creative-hero--section .content-box .hero-subtitle {
-                display: block;
-                font-size: 16px;
-                line-height: 22px;
-                color: #fff;
-                font-weight: 700;
-                letter-spacing: .8px;
-                margin-bottom: 33px;
+            /* ---- IMAGE: hidden until its fade-up animation runs ---- */
+            .content-box img {
                 opacity: 0;
-                animation: fadeInUp 0.6s ease-in-out 0.6s forwards;
+                animation: fadeInUp 0.7s ease-out 0.2s forwards;
             }
 
-            .creative-hero--section .content-box .hero-title {
-                opacity: 0;
-                animation: fadeInUp 0.6s ease-in-out 0.9s forwards;
-            }
+        /* ---- Staggered text elements (kept for future use) ---- */
+        .creative-hero--section .content-box .hero-subtitle {
+            display: block;
+            font-size: 16px;
+            line-height: 22px;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            margin-bottom: 33px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-in-out 0.6s forwards;
+        }
 
-            .creative-hero--section .content-box .hero-desc {
-                color: black;
-                margin-bottom: 40px;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 32px;
-                opacity: 0;
-                animation: fadeInUp 0.6s ease-in-out 1.2s forwards;
-            }
+        .creative-hero--section .content-box .hero-title {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-in-out 0.9s forwards;
+        }
+
+        .creative-hero--section .content-box .hero-desc {
+            color: #000;
+            margin-bottom: 40px;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 32px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-in-out 1.2s forwards;
+        }
 
         .content-box .btn-box {
             display: flex;
@@ -106,6 +120,9 @@ title: Home
             animation: fadeInUp 0.6s ease-in-out 1.6s forwards;
         }
 
+        /* ============================================================
+   KEYFRAMES
+   ============================================================ */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -128,27 +145,36 @@ title: Home
             }
         }
 
-        /* Pulsante 6: Bolla - styling */
-        button {
+        /* ============================================================
+   BUTTONS (shared base – replaces the bare `button {}` selector
+   so <a class="btn"> and <a class="bttn"> both work)
+   ============================================================ */
+        .btn,
+        .bttn {
+            display: inline-block;
+            font-family: inherit;
             font-size: 16px;
+            line-height: 1.2;
             letter-spacing: 4px;
             padding: 20px 50px;
-            border: none;
-            cursor: pointer;
             margin: 10px;
             border-radius: 150px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* Pulsante 6: Bolla - animation */
+        /* ---- Button 6 – "bubble" ---- */
         .btn-6 {
-            background-color: black;
-            color: white;
+            background-color: #000;
+            color: #fff;
         }
 
-            .btn-6:hover {
+            .btn-6:hover,
+            .btn-6:focus-visible {
                 animation: bubble 1s forwards;
             }
 
@@ -162,37 +188,111 @@ title: Home
             }
         }
 
+        /* ---- Sliding buttons (.hover-slide-left) ----
+   A pseudo-element slides in from the left; the <span> text
+   sits above it and shifts slightly to emphasise the motion. */
+        .btn-2 {
+            background: transparent;
+            color: #000;
+            border: 2px solid #000;
+        }
 
+            .btn-2 span {
+                position: relative;
+                z-index: 2;
+                display: inline-block;
+                transition: transform 0.35s ease;
+            }
 
+            .btn-2::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: #000;
+                transform: translateX(-101%);
+                transition: transform 0.35s ease;
+                z-index: 1;
+            }
 
-        /* =================== RESPONSIVE IPAD PRO ============================= */
+            .btn-2:hover::before,
+            .btn-2:focus-visible::before {
+                transform: translateX(0);
+            }
+
+            .btn-2:hover,
+            .btn-2:focus-visible {
+                color: #fff;
+            }
+
+                .btn-2:hover span,
+                .btn-2:focus-visible span {
+                    transform: translateX(6px);
+                }
+
+        /* ============================================================
+   HR  – 20px wider than the header (auto-container) section
+   - auto-container max-width = 1310px  → hr max-width = 1330px
+   - on small screens auto-container's content box = 100% - 30px
+     (15px padding each side), so hr = 100% - 10px = +20px wider
+   ============================================================ */
+        .creative-hero--section hr {
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            width: calc(100% - 10px); /* 20px wider than the padded content box */
+            max-width: 1330px; /* 20px wider than .auto-container (1310) */
+            margin: 20px auto;
+        }
+
+        /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+        /* iPad Pro */
         @media (max-width: 1366px) {
             .creative-hero--section .bg-overlay {
-                background-image: none;
                 background-color: #16243e;
                 mix-blend-mode: hard-light;
             }
         }
-        /* =================== RESPONSIVE IPAD  ============================= */
+
+        /* iPad / tablet */
         @media (max-width: 991px) {
             .creative-hero--section {
                 height: auto;
-                padding: 130px 0px;
+                padding: 130px 0;
             }
 
-                .creative-hero--section .content-box {
-                    max-width: 100%;
-                    text-align: center;
-                }
+            .content-box {
+                max-width: 100%;
+            }
         }
-        /* =================== RESPONSIVE IPHONE  ============================= */
+
+        /* iPhone / small phones */
         @media (max-width: 575px) {
-            .creative-hero--section .content-box .hero-title {
+            .content-box .hero-title {
                 font-size: 44px;
             }
 
-            .creative-hero--section .content-box .hero-desc {
+            .content-box .hero-desc {
                 font-size: 15px;
+            }
+
+            .btn,
+            .bttn {
+                font-size: 14px;
+                letter-spacing: 2px;
+                padding: 16px 32px;
+            }
+        }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .content-box img,
+            .content-box .btn-box,
+            .creative-hero--section .content-box .hero-title,
+            .creative-hero--section .content-box .hero-subtitle,
+            .creative-hero--section .content-box .hero-desc {
+                animation: none;
+                opacity: 1;
             }
         }
 
